@@ -1,0 +1,40 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+
+@charset "UTF-8";
+
+// ---------------------- Вспомогательные части
+
+// Подключение стилей для кнопки
+@import 'assets/scss/parts/buttons';
+
+
+// Подключение инпутов
+@import 'assets/scss/parts/inputs';
+
+// Подключение шрифтов
+@import 'assets/scss/parts/fonts';
+
+// Подключение общий стилей
+@import 'assets/scss/parts/common_style';
+
+// Подключение общий стилей выпадающих
+@import 'assets/scss/parts/select';
+
+// Подключение общий стилей чекбоксов
+@import 'assets/scss/parts/checkbox';
+
+// Подключение общий стилей paginator
+@import 'assets/scss/parts/paginator';
+
+html, body { height: 100%; }
+body { margin: 0; }

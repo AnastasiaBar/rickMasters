@@ -1,0 +1,293 @@
+<app-title-page></app-title-page>
+
+<div class="container__main">
+  <app-sidebar></app-sidebar>
+
+  <div class="block__main">
+
+    <div class="block__breadcrumbs">
+      <div class="icon">
+        <img src="../../../assets/img/arrow-left.svg" alt="">
+      </div>
+      <p>Назад</p>
+    </div>
+
+    <div class="block__form">
+      <p>Настройка учетных записей сотрудников контрагента</p>
+
+      <div class="block__buttons">
+
+        <div class="buttons__active">
+          <a class="btn btn-fill">
+            <p>Добавить</p>
+
+            <div class="icon">
+              <img src="../../../assets/img/add.svg" alt="">
+            </div>
+          </a>
+
+          <a class="btn btn-fill" (click)="unblockUser()">
+            <p>Разблокировать</p>
+
+            <div class="icon">
+              <img src="../../../assets/img/checkmark__button.svg" alt="">
+            </div>
+          </a>
+
+          <a class="btn btn-fill" (click)="blockUser()">
+            <p>Заблокировать</p>
+
+            <div class="icon">
+              <img src="../../../assets/img/delete.svg" alt="">
+            </div>
+          </a>
+
+        </div>
+
+        <a href="" class="btn btn-fill disabled">
+          <div class="icon">
+            <img src="../../../assets/img/ic_filter_list.svg" alt="">
+          </div>
+
+          <p>Фильтр</p>
+        </a>
+
+      </div>
+
+      <div class="form" >
+        <p>Фильтр</p>
+        <form action="" [formGroup]="formGroup">
+
+          <div class="container__item">
+            <div class="item">
+              <p>Логин</p>
+              <input type="text" name="login" formControlName="userLogin">
+
+              <div class="delete-value-input" *ngIf="_userLogin.value && _userLogin.valid" (click)="inputCleaning('userLogin')">
+                <img  src="../../../assets/img/input_delete.svg" alt="">
+              </div>
+
+              <div class="delete-value-input" *ngIf="_userLogin.invalid" (click)="inputCleaning('userLogin')">
+                <img src="../../../assets/img/input_delete_error.svg" alt="">
+              </div>
+
+              <div class="error" *ngIf="_userLogin.invalid && _userLogin.touched">
+                <p *ngIf="_userLogin.errors?.['pattern']">Недопустимые символы</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <p>Телефон</p>
+              <input type="tel" name="telephone" formControlName="userPhone">
+
+              <div class="delete-value-input" *ngIf="_userPhone.value && _userPhone.valid" (click)="inputCleaning('userPhone')">
+                <img  src="../../../assets/img/input_delete.svg" alt="">
+              </div>
+
+              <div class="delete-value-input" *ngIf="_userPhone.invalid" (click)="inputCleaning('userPhone')">
+                <img src="../../../assets/img/input_delete_error.svg" alt="">
+              </div>
+
+              <div class="error" *ngIf="_userPhone.invalid && _userPhone.touched">
+                <p *ngIf="_userPhone.errors?.['pattern']">Недопустимые символы</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <p>Дата создания</p>
+
+              <input type="date" name="data_create"  formControlName="userDataCreate" [max]="maxDate > endDate ? endDate : maxDate" (change)="onDateChange()">
+
+              <div class="error" *ngIf="_userDataCreate.invalid && _userDataCreate.touched">
+                <p *ngIf="_userDataCreate.errors?.['pattern']">Ошибка</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <p>Статус</p>
+              <mat-form-field>
+                <mat-select formControlName="userStatus">
+                  <mat-option value="active">Активен</mat-option>
+                  <mat-option value="disable">Заблокирован</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="item">
+              <p>E-mail</p>
+              <input type="email" name="email" formControlName="userEmail">
+
+              <div class="delete-value-input" *ngIf="_userEmail.value && _userEmail.valid" (click)="inputCleaning('userEmail')">
+                <img  src="../../../assets/img/input_delete.svg" alt="">
+              </div>
+
+              <div class="delete-value-input" *ngIf="_userEmail.invalid" (click)="inputCleaning('userEmail')">
+                <img src="../../../assets/img/input_delete_error.svg" alt="">
+              </div>
+
+              <div class="error" *ngIf="_userEmail.invalid && _userEmail.touched">
+                <p *ngIf="_userEmail.errors?.['pattern']">Недопустимые символы</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <p>Роль</p>
+              <mat-form-field>
+                <mat-select formControlName="userRole">
+                  <mat-option value="false">Пользователь</mat-option>
+                  <mat-option value="true">Администратор</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="item">
+              <p>Дата изменения</p>
+              <input type="date" name="date_change" formControlName="userDateChange" [min]="startDate" [max]="maxDate" (change)="onDateChange()">
+
+              <div class="error" *ngIf="_userDateChange.invalid && _userDateChange.touched">
+                <p *ngIf="_userDateChange.errors?.['pattern']">Ошибка</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="block__buttons">
+            <a (click)="onSubmit()" class="btn btn-fill">Применить</a>
+
+            <a class="btn btn-fill disabled" (click)="cleanFilter()">Отмена</a>
+
+            <a class="btn btn-fill disabled" (click)="clearingForm()">Сбросить</a>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="block__table">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>
+                Действия
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Действия</p>
+                <div class="icon">
+                  <img src="../../../assets/img/ic_more_horiz.svg" alt="">
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="login">
+              <th mat-header-cell *matHeaderCellDef>
+                <div class="block__checkbox">
+                  <mat-checkbox
+                    [(ngModel)]="allCheckbox"
+                    (change)="setAll($event)">
+                  </mat-checkbox>
+                  Логин
+                </div>
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Логин</p>
+                <div class="block__checkbox">
+                  <mat-checkbox
+                    [(ngModel)]="element.isChecked"
+                    (change)="updateAllComplete(element.id, $event)"></mat-checkbox>
+                  <p>{{element.login}}</p>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>E-mail</th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Email</p>
+                <p>{{element.email}} </p>
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef> Телефон</th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Телефон</p>
+                <p>{{element.phone}} </p>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef> Роли </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Роли</p>
+                <p *ngIf="element.role == true">Администратор</p>
+                <p *ngIf="element.role == false">Пользователь</p>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="userDateChange">
+              <th mat-header-cell *matHeaderCellDef> Дата изменения </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Дата изменения</p>
+                <p>{{element.userDateChange}}</p>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="userDataCreate">
+              <th mat-header-cell *matHeaderCellDef> Дата создания </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Дата создания</p>
+                <p>{{element.userDataCreate}} </p>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Статус </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Статус</p>
+                <p *ngIf="element.status == 'active'">Активен</p>
+                <p *ngIf="element.status == 'disable'">Заблокирован</p>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="signature">
+              <th mat-header-cell *matHeaderCellDef> Наличие ЭП </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="disable">Наличие ЭП</p>
+                <div class="icon" *ngIf="element.signature == true">
+                  <img src="../../../assets/img/check%201.svg" alt="">
+                </div>
+                <div class="icon" *ngIf="element.signature == false">
+                  <img src="../../../assets/img/remove%201.svg" alt="">
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+
+          <div class="block__paginator">
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                           showFirstLastButtons
+                           aria-label="Select page of periodic elements">
+            </mat-paginator>
+
+
+
+              <p>Количество выбранных записей: {{arrCheckbox.length}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<section class="section__sidebar" [class.active]='panelOpenState'>
+
+  <div class="inf__user">
+    <div class="item">
+      <div class="icon">
+        <img src="../../../../assets/img/icons8-admin_settings_male.svg" alt="">
+      </div>
+      <p>Иванов И.И</p>
+    </div>
+    <div class="item">
+      <div class="icon">
+        <img src="../../../../assets/img/icons8-management.svg" alt="">
+      </div>
+      <p>Администрирование</p>
+    </div>
+  </div>
+
+  <nav>
+    <ul>
+      <li>
+        <mat-accordion>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <div class="block__item">
+                  <div class="block__arrow">
+                    <p class="item__title">Суперагент</p>
+
+                    <div class="icon">
+                      <img src="../../../../assets/img/input-arrow-down.svg" alt="">
+                    </div>
+                  </div>
+                  <p>Банк ВТБ(ПАО)</p>
+                </div>
+
+                <div class="block__item adaptive">
+                  <div class="block__arrow">
+                    <p class="item__title">Суперагент</p>
+
+                    <p>Банк ВТБ(ПАО)</p>
+
+                    <div class="icon">
+                      <img src="../../../../assets/img/input-arrow-down.svg" alt="">
+                    </div>
+                  </div>
+                </div>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="drop_item">
+
+              <div class="item__icon">
+                <div class="icon">
+                  <img src="../../../../assets/img/ic_work.svg" alt="">
+                </div>
+
+                <p>Управление</p>
+              </div>
+
+              <ul>
+                <li class="active">Карточка контрагента</li>
+                <li>Договоры контрагента</li>
+              </ul>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </li>
+      <li>
+        <div class="item">
+          <div class="icon">
+            <img src="../../../../assets/img/ic_supervisor_account.svg" alt="">
+          </div>
+          <p class="item__title">Субагенты</p>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="project__version">
+    <p>v1.01</p>
+  </div>
+</section>

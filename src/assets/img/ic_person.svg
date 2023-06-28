@@ -1,0 +1,19 @@
+<svg width="34" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ic_person_48px 2" clip-path="url(#clip0_1_300)">
+<g id="Group">
+<g id="Mask Group">
+<mask id="mask0_1_300" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="-1" width="32" height="33">
+<circle id="Ellipse 2" cx="17" cy="15.5" r="16" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask0_1_300)">
+<path id="Vector" d="M17 17.5C20.1308 17.5 22.6666 14.8823 22.6666 11.6667C22.6666 8.44379 20.1308 5.83337 17 5.83337C13.8691 5.83337 11.3333 8.44379 11.3333 11.6667C11.3333 14.8823 13.8691 17.5 17 17.5ZM17 20.4167C13.2245 20.4167 5.66663 22.3636 5.66663 26.25V29.1667L17 33L28.3333 29.1667V26.25C28.3333 22.3636 20.7754 20.4167 17 20.4167Z" fill="#FBF9FA"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_1_300">
+<rect width="34" height="35" fill="white"/>
+</clipPath>
+</defs>
+</svg>
